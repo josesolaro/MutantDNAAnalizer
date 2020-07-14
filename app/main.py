@@ -2,12 +2,13 @@ from settings import app
 from domain.DNAAnalizer import DNAAnalizer
 from domain.MutantsAnalizer import MutantsAnalizer
 from flask import request, json
+from model.Mutants import Mutants
 
 
 @app.route("/stats", methods=['GET'])
 def status():
     try:
-        mutants, humans, ratio = MutantsAnalizer.get_mutants_ratio()
+        mutants, humans, ratio = MutantsAnalizer.get_mutants_ratio(Mutants())
         return json.dumps({"count_mutant_dna": mutants, "count_human_dna": humans, "ratio": ratio})
     except Exception as e:
         return json.dumps(e.__str__()), 403, {'ContentType': 'application/json'}
