@@ -1,5 +1,6 @@
 import numpy as np
 import utils.InputConverter as converter
+from model.Mutants import Mutants
 
 
 class DNAAnalizer:
@@ -15,7 +16,7 @@ class DNAAnalizer:
         total_chain_found += self.find_oblique(self._arr_str)
 
         match = True if total_chain_found > 1 else False
-        self._dna_analizer.save_dna(self._arr_str, match)
+        self._dna_analizer.save_dna(self._arr_str, match,  Mutants())
 
         return match
 
