@@ -26,15 +26,6 @@ and then
 this will create an image and the launch in a container. This Image include all what you need to use the application
 
 
-## Deployment
-
-For development you can just modify the code and create the image again or, download Python, PIP, install with pip all the requirement list in requirement.txt
-and do:
-
-* python main.py
-
-in the app folder
-
 ## Built With
 
 * [Python](https://www.python.org/)
