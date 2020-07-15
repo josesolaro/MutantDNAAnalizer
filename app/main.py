@@ -4,6 +4,7 @@ from domain.MutantsAnalizer import MutantsAnalizer
 from flask import request, json
 from model.Mutants import Mutants
 
+port = "80"
 
 @app.route("/stats", methods=['GET'])
 def status():
@@ -29,4 +30,4 @@ def is_mutant():
         return json.dumps(e.__str__()), 403, {'ContentType': 'application/json'}
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port='80')
+    app.run(host='0.0.0.0', port=port)
