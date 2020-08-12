@@ -8,36 +8,21 @@ def obtain_vertical(str):
 def oblique_to_horizontal(mat):
     oblique = []
     n_range = np.shape(mat)[0]
-    for x in range(n_range):
-        try:
-            # recorro de forma oblicua semitriangulo superior
-            row = [mat[i + x, i] for i in range(n_range - x)]
-            if len(row) >= 4:
-                oblique.append(row)
-            # recorro de forma oblicua semitriangulo inferior
-            if x > 0:
-                row = [mat[i, i + x] for i in range(n_range - x)]
-                if len(row) >= 4:
-                    oblique.append(row)
-        except:
-            None
+    for i in range(n_range):
+        new_arr = np.diagonal(mat, i).tolist()
+        oblique = add_higher(oblique, new_arr)
+        if i != 0:
+            new_arr = np.diagonal(mat, -i).tolist()
+            oblique = add_higher(oblique, new_arr)
     return ["".join(s) for s in oblique]
 
 
+def add_higher(oblique, new_arr):
+    if len(new_arr) >= 4:
+        oblique.append(new_arr)
+    return oblique
+
+
 def inv_oblique_to_horizontal(mat):
-    oblique_inv = []
-    n_range = np.shape(mat)[0]
-    for x in range(n_range):
-        try:
-            # recorro de forma oblicua inversa semitriangulo superior
-            row = [mat[i, n_range - i - x - 1] for i in range(n_range - x)]
-            if len(row) >= 4:
-                oblique_inv.append(row)
-            # recorro de forma oblicua inversa semitriangulo inferior
-            if x > 0:
-                row = [mat[i + x, -i - 1] for i in range(n_range - x)]
-                if len(row) >= 4:
-                    oblique_inv.append(row)
-        except:
-            None
-    return ["".join(s) for s in oblique_inv]
+    mat = np.fliplr(mat)
+    return oblique_to_horizontal(mat)
